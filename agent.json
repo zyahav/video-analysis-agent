@@ -1,0 +1,16 @@
+{
+    "name": "video-analysis-agent",
+    "description": "Orchestrates video analysis workflows using XState and @xstate/store. Simulates each step with a 1-second delay.",
+    "instructions": [
+        "Use XState v5+ and @xstate/store for all state management.",
+        "Each workflow step must simulate a 1-second delay.",
+        "Expose a /agent-info endpoint that returns this file as JSON."
+    ],
+    "endpoints": [
+        {
+            "path": "/agent-info",
+            "method": "GET",
+            "description": "Returns this agent's description and instructions."
+        }
+    ]
+}

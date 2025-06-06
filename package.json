@@ -1,0 +1,25 @@
+{
+  "name": "video-analysis-agent",
+  "version": "1.0.0",
+  "description": "## Description This agent orchestrates video analysis workflows using XState and @xstate/store.   It simulates each workflow step with a 1-second delay and exposes a `/agent-info` endpoint for agent-to-agent discovery and documentation.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zyahav/video-analysis-agent.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zyahav/video-analysis-agent/issues"
+  },
+  "homepage": "https://github.com/zyahav/video-analysis-agent#readme",
+  "dependencies": {
+    "@xstate/store": "^3.6.2",
+    "xstate": "^5.19.4"
+  }
+}
