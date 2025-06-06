@@ -1,29 +1,24 @@
-import http from 'http';
-import fs from 'fs/promises';
-import path from 'path';
+import { Hono } from 'hono';
 
-const PORT = process.env.PORT || 8787;
+// Import agent.json as a static asset or use import assertion (Node 20+ and ESM)
+import agentInfo from '../agent.json' assert { type: 'json' };
+import { testMachine } from './machine.js';
+import { createActor } from 'xstate';
 
-const server = http.createServer(async (req, res) => {
-	if (req.url === '/agent-info' && req.method === 'GET') {
-		try {
-			const agentInfo = await fs.readFile(
-				path.join(process.cwd(), 'agent.json'),
-				'utf-8'
-			);
-			res.writeHead(200, { 'Content-Type': 'application/json' });
-			res.end(agentInfo);
-		} catch (err) {
-			res.writeHead(500, { 'Content-Type': 'application/json' });
-			res.end(JSON.stringify({ error: 'Could not read agent.json' }));
-		}
-		return;
-	}
-	// Placeholder for other endpoints (e.g., workflow logic)
-	res.writeHead(404, { 'Content-Type': 'text/plain' });
-	res.end('Not found');
+const app = new Hono();
+
+app.get('/agent-info', (c) => {
+	return c.json(agentInfo);
 });
 
-server.listen(PORT, () => {
-	console.log(`Agent listening on http://localhost:${PORT}`);
+app.get('/test-machine', (c) => {
+	const actor = createActor(testMachine);
+	actor.start();
+	actor.send({ type: 'START' });
+	// Immediately return the current state (likely 'running')
+	return c.json({ state: actor.getSnapshot().value });
 });
+
+// Add more routes as needed
+
+export default app;

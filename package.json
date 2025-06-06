@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "wrangler dev"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,8 @@
   "dependencies": {
     "@xstate/store": "^3.6.2",
     "xstate": "^5.19.4"
+  },
+  "devDependencies": {
+    "wrangler": "^3.57.0"
   }
 }
